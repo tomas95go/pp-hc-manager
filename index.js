@@ -6,11 +6,8 @@ app.use(express.static('public'));
 app.set('views','./views');
 app.set('view engine', 'pug');
 
-const pageTitle = 'HC-Manager';
-const myCustomText = `Let's start!`;
-
 app.get('/', (req, res) => {
-    res.render('index', {pageTitle: pageTitle, myCustomText: myCustomText});
+    res.render('layout/layout');
 });
 
 app.listen(port, () => {

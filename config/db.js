@@ -1,76 +1,80 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize({
-    dialect: 'sqlite', 
-    storage: '/home/tommy/Documents/Projects/petProjects/HC-ManagerDB/hcmanagerdb'
+  dialect: "sqlite",
+  storage:
+    "/home/tommy/Documents/Projects/petProjects/HC-ManagerDB/hcmanagerdb",
 });
 
-const Haircut = sequelize.define('Haircut',{
+const Haircut = sequelize.define(
+  "Haircut",
+  {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true,
-        unique: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true,
+      unique: true,
     },
     description: {
-        type: DataTypes.STRING(70),
-        allowNull: false
+      type: DataTypes.STRING(70),
+      allowNull: false,
     },
     price: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     active: {
-        type: DataTypes.INTEGER(1),
-        defaultValue: 1
+      type: DataTypes.INTEGER(1),
+      defaultValue: 1,
     },
     creationDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW,
-        field: 'creation_date'
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
+      field: "creation_date",
     },
     modificationDate: {
-        type: DataTypes.DATE,
-        field: 'modification_date'
+      type: DataTypes.DATE,
+      field: "modification_date",
     },
     softDeleteDate: {
-        type: DataTypes.DATE,
-        field: 'soft_delete_date'
-    }
-}, {
-    timestamps: false
-});
+      type: DataTypes.DATE,
+      field: "soft_delete_date",
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
 
-console.log('DB: ', Haircut === sequelize.models.Haircut);
+console.log("DB: ", Haircut === sequelize.models.Haircut);
 
 const myAwait = async () => {
-    try{
-        await Haircut.sync();
-        console.log('Devolviendo mi promesita: ', Sequelize.NOW);
-    }catch(error){
-        console.log('Meh, an error: ', error);      
-    }
-    
-}
+  try {
+    await Haircut.sync();
+    console.log("Devolviendo mi promesita: ", Sequelize.NOW);
+  } catch (error) {
+    console.log("Meh, an error: ", error);
+  }
+};
 
 myAwait();
 
 const militaryHC = Haircut.build({
-    description: 'Military Haircut',
-    price: 1500
+  description: "Military Haircut",
+  price: 1500,
 });
 
 const saveData = async () => {
-    try{
-        await militaryHC.save();
-        console.log('I did it mom! I interacted with a database');
-    } catch (error) {
-        console.log('Meh, an error: ', error);
-    }
-}
+  try {
+    await militaryHC.save();
+    console.log("I did it mom! I interacted with a database");
+  } catch (error) {
+    console.log("Meh, an error: ", error);
+  }
+};
 
-saveData();
+//saveData();
 
 module.exports = Haircut;

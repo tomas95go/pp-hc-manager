@@ -48,9 +48,7 @@ const Haircut = sequelize.define(
   }
 );
 
-console.log("DB: ", Haircut === sequelize.models.Haircut);
-
-const myAwait = async () => {
+/*const myAwait = async () => {
   try {
     await Haircut.sync();
     console.log("Devolviendo mi promesita: ", Sequelize.NOW);
@@ -59,21 +57,21 @@ const myAwait = async () => {
   }
 };
 
-myAwait();
+myAwait();*/
 
-const militaryHC = Haircut.build({
+/*const militaryHC = Haircut.build({
   description: "Military Haircut",
   price: 1500,
 });
-
-const saveData = async () => {
+*/
+/*const saveData = async () => {
   try {
     await militaryHC.save();
     console.log("I did it mom! I interacted with a database");
   } catch (error) {
     console.log("Meh, an error: ", error);
   }
-};
+};*/
 
 //saveData();
 

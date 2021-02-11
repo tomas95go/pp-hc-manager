@@ -1,4 +1,5 @@
 const express = require("express");
+const addNewHaircut = require("../../controllers/haircut-crud/haircut-crud");
 const haircutRouter = express.Router();
 
 haircutRouter.get("/home", (req, res) => {
@@ -6,8 +7,10 @@ haircutRouter.get("/home", (req, res) => {
 });
 
 haircutRouter.post("/haircut-data", (req, res) => {
-  console.log(req.body);
-  res.json(req.body);
+  const { hcDescription, hcPrice } = req.body;
+
+  addNewHaircut(hcDescription, hcPrice);
+  //res.json(req.body);
 });
 
 module.exports = haircutRouter;

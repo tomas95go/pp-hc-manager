@@ -10,20 +10,12 @@ div.card.d-flex
                         th Price
                 tbody
                         - 
-                            const haircutListData = [{
-                                    'Number': 1,
-                                    'Description': 'Haircut-',
-                                    'Price': 10.00
-                                },{
-                                    'Number': 2,
-                                    'Description': 'Haircut-',
-                                    'Price': 15.00
-                                }];
+                            const haircutListData = haircutList
                         each haircut in haircutListData
                             tr
-                                td= haircut.Number
-                                td= haircut.Description + haircut.Number
-                                td= '$' + haircut.Price
+                                td= haircut.id
+                                td= haircut.description
+                                td= '$' + haircut.price
     div.card-footer
         div.container.d-flex.justify-content-center
             span Discover your style

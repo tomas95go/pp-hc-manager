@@ -1,20 +1,31 @@
-const Haircut = require("../../config/db");
+const Haircut = require('../../config/db');
+
+const getAllHaircutsDB = () => {
+    const getHaircutList = Haircut.findAll({
+        attributes: ['id', 'description', 'price'],
+    });
+
+    return getHaircutList;
+};
 
 const addNewHaircutDB = async (hcDescription, hcPrice) => {
-  const newHaircut = buildNewHaircut(hcDescription, hcPrice);
-  try {
-    await newHaircut.save();
-  } catch (error) {
-    console.log("Meh an error: ", error);
-  }
+    const newHaircut = buildNewHaircut(hcDescription, hcPrice);
+    try {
+        await newHaircut.save();
+    } catch (error) {
+        console.log('Meh an error: ', error);
+    }
 };
 
 const buildNewHaircut = (hcDescription, hcPrice) => {
-  const newHaircut = Haircut.build({
-    description: hcDescription,
-    price: hcPrice,
-  });
-  return newHaircut;
+    const newHaircut = Haircut.build({
+        description: hcDescription,
+        price: hcPrice,
+    });
+    return newHaircut;
 };
 
-module.exports = addNewHaircutDB;
+module.exports = {
+    getAllHaircutsDB,
+    addNewHaircutDB,
+};

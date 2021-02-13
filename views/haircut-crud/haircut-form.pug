@@ -4,10 +4,10 @@ div.card.d-flex
         form#haircutForm
             div.mb-3
                 label(for='hcDescription', class='form-label') Description
-                input(type='text', class='form-control', name='hcDescription' ,id='hcDescription', placeholder='Description')
+                input(type='text', class='form-control', name='hcDescription' ,id='hcDescription', placeholder='Description', autocomplete='off')
             div.mb-3
                 label(for='hcPrice', class='form-label') Price
-                input(type='number', class='form-control', name='hcPrice' ,id='hcPrice', placeholder='Price')
+                input(type='number', class='form-control', name='hcPrice', step='any' ,id='hcPrice', placeholder='Price')
             div.mb-3
                 button.btn.btn-primary Submit
     div.card-footer

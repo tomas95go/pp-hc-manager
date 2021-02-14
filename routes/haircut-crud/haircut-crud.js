@@ -6,6 +6,10 @@ const {
 const haircutRouter = express.Router();
 
 haircutRouter.get('/home', (req, res) => {
+    res.render('layout/layout');
+});
+
+haircutRouter.get('/haircutList', (req, res) => {
     const hcList = listAllHaircuts(req, res);
     return hcList;
 });

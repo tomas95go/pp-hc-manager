@@ -6,15 +6,15 @@ const {
 const listAllHaircuts = async (req, res) => {
     try {
         const getHaircutList = await getAllHaircutsDB();
-        const haircutList = getHaircutList.map((haircutData) => {
+        const haircutList = getHaircutList.map(haircutData => {
             return {
-                id: haircutData.dataValues.id,
+                number: haircutData.dataValues.number,
                 description: haircutData.dataValues.description,
                 price: haircutData.dataValues.price,
             };
         });
 
-        res.render('layout/layout', { haircutList: haircutList });
+        res.status(200).json(haircutList);
     } catch (error) {
         console.log('Meh, an error: ', error);
     }

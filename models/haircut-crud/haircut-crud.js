@@ -2,7 +2,7 @@ const Haircut = require('../../config/db');
 
 const getAllHaircutsDB = () => {
     const getHaircutList = Haircut.findAll({
-        attributes: ['id', 'description', 'price'],
+        attributes: [['id', 'number'], 'description', 'price'],
     });
 
     return getHaircutList;

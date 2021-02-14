@@ -3,19 +3,14 @@ div.card.d-flex
     div.card-body 
         div.table-responsive
             table.table.table-bordered
-                thead
+                thead(id='haircutTableHeader')
                     tr
-                        th Number
-                        th Description
-                        th Price
-                tbody
-                        - 
-                            const haircutListData = haircutList
-                        each haircut in haircutListData
-                            tr
-                                td= haircut.id
-                                td= haircut.description
-                                td= '$' + haircut.price
+                        th#number Number
+                        th#description Description
+                        th#price Price
+                tbody(id='haircutTableBody')
     div.card-footer
         div.container.d-flex.justify-content-center
             span Discover your style
+block haircut-form-scripts
+    script(type='text/javascript', src='../js/haircut-crud-js/haircut-crud-list.js') 

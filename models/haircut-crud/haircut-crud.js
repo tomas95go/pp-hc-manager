@@ -3,6 +3,9 @@ const Haircut = require('../../config/db');
 const getAllHaircutsDB = () => {
     const getHaircutList = Haircut.findAll({
         attributes: [['id', 'number'], 'description', 'price'],
+        where: {
+            active: 1,
+        },
     });
 
     return getHaircutList;
@@ -25,7 +28,36 @@ const buildNewHaircut = (hcDescription, hcPrice) => {
     return newHaircut;
 };
 
+const updateHaircutDB = id => {
+    const haircutUpdate = Haircut.update(
+        {
+            description: 'updateHaircut!',
+        },
+        {
+            where: {
+                active: 1,
+                id: id,
+            },
+        }
+    );
+
+    return haircutUpdate;
+};
+
+const selectIndividualDB = id => {
+    const selectHaircut = Haircut.findAll({
+        attributes: [['id', 'number'], 'description', 'price'],
+        where: {
+            active: 1,
+            id: id,
+        },
+    });
+    return selectHaircut;
+};
+
 module.exports = {
     getAllHaircutsDB,
     addNewHaircutDB,
+    updateHaircutDB,
+    selectIndividualDB,
 };

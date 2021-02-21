@@ -1,6 +1,8 @@
 const {
     getAllHaircutsDB,
     addNewHaircutDB,
+    updateHaircutDB,
+    selectIndividualDB,
 } = require('../../models/haircut-crud/haircut-crud');
 
 const listAllHaircuts = async (req, res) => {
@@ -21,11 +23,24 @@ const listAllHaircuts = async (req, res) => {
 };
 
 const addNewHaircut = (hcDescription, hcPrice) => {
-    console.log('This is from the controller: ', hcDescription, hcPrice);
     addNewHaircutDB(hcDescription, hcPrice);
+};
+
+const updateHaircut = async (id, req, res) => {
+    const updatedData = await updateHaircutDB(id);
+    const selectedIndividual = await selectIndividualDB(id);
+    const newData = selectedIndividual.map(newHaircutData => {
+        return {
+            number: newHaircutData.dataValues.number,
+            description: newHaircutData.dataValues.description,
+            price: newHaircutData.dataValues.price,
+        };
+    });
+    res.status(200).json(newData);
 };
 
 module.exports = {
     listAllHaircuts,
     addNewHaircut,
+    updateHaircut,
 };

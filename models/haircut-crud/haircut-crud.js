@@ -55,9 +55,26 @@ const selectIndividualDB = id => {
     return selectHaircut;
 };
 
+const deleteHaircutDB = id => {
+    const softDelete = Haircut.update(
+        {
+            active: 0,
+        },
+        {
+            where: {
+                active: 1,
+                id: id,
+            },
+        }
+    );
+
+    return softDelete;
+};
+
 module.exports = {
     getAllHaircutsDB,
     addNewHaircutDB,
     updateHaircutDB,
     selectIndividualDB,
+    deleteHaircutDB,
 };

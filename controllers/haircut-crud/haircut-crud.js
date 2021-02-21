@@ -3,6 +3,7 @@ const {
     addNewHaircutDB,
     updateHaircutDB,
     selectIndividualDB,
+    deleteHaircutDB,
 } = require('../../models/haircut-crud/haircut-crud');
 
 const listAllHaircuts = async (req, res) => {
@@ -39,8 +40,14 @@ const updateHaircut = async (id, req, res) => {
     res.status(200).json(newData);
 };
 
+const deleteHaircut = async (id, req, res) => {
+    const softDelete = await deleteHaircutDB(id);
+    res.status(200).json('Se elimino con extio');
+};
+
 module.exports = {
     listAllHaircuts,
     addNewHaircut,
     updateHaircut,
+    deleteHaircut,
 };

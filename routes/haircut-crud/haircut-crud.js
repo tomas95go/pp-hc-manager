@@ -3,6 +3,7 @@ const {
     listAllHaircuts,
     addNewHaircut,
     updateHaircut,
+    deleteHaircut,
 } = require('../../controllers/haircut-crud/haircut-crud');
 const haircutRouter = express.Router();
 
@@ -26,8 +27,8 @@ haircutRouter.put('/haircut-edit', (req, res) => {
 });
 
 haircutRouter.put('/haircut-delete', (req, res) => {
-    /*const { id } = req.body;
-    console.log('Route delete, ID: ', id);*/
+    const { id } = req.body;
+    deleteHaircut(id, req, res);
 });
 
 module.exports = haircutRouter;

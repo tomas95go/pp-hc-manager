@@ -11,13 +11,9 @@ const getAllHaircutsDB = () => {
     return getHaircutList;
 };
 
-const addNewHaircutDB = async (hcDescription, hcPrice) => {
+const addNewHaircutDB = (hcDescription, hcPrice) => {
     const newHaircut = buildNewHaircut(hcDescription, hcPrice);
-    try {
-        await newHaircut.save();
-    } catch (error) {
-        console.log('Meh an error: ', error);
-    }
+    return newHaircut;
 };
 
 const buildNewHaircut = (hcDescription, hcPrice) => {

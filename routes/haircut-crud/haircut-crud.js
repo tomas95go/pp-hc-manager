@@ -18,7 +18,7 @@ haircutRouter.get('/haircutList', (req, res) => {
 
 haircutRouter.post('/haircut-data', (req, res) => {
     const { hcDescription, hcPrice } = req.body;
-    addNewHaircut(hcDescription, hcPrice);
+    addNewHaircut(hcDescription, hcPrice, req, res);
 });
 
 haircutRouter.put('/haircut-edit', (req, res) => {

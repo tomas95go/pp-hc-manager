@@ -23,8 +23,15 @@ const listAllHaircuts = async (req, res) => {
     }
 };
 
-const addNewHaircut = (hcDescription, hcPrice) => {
-    addNewHaircutDB(hcDescription, hcPrice);
+const addNewHaircut = async (hcDescription, hcPrice, req, res) => {
+    const newHaircut = addNewHaircutDB(hcDescription, hcPrice);
+
+    try {
+        await newHaircut.save();
+        res.status(200).json(newHaircut);
+    } catch (error) {
+        console.log('Meh, an error: ', error);
+    }
 };
 
 const updateHaircut = async (id, req, res) => {

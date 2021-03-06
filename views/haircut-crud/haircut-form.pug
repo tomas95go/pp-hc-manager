@@ -1,7 +1,7 @@
-div.card.d-flex
+div#add-form-card.card.d-flex
     div.card-header.bg-primary.text-white Add new haircut
     div.card-body
-        form#haircutForm
+        form#addHaircutForm
             div.mb-3
                 label(for='hcDescription', class='form-label') Description
                 input(type='text', class='form-control', name='hcDescription' ,id='hcDescription', placeholder='Description', autocomplete='off')
@@ -13,4 +13,22 @@ div.card.d-flex
     div.card-footer
         div.container.d-flex.justify-content-center
             span Discover your style
+
+div#edit-form-card.card.d-flex.d-none
+    div.card-header.bg-primary.text-white Edit haircut
+    div.card-body
+        form#edit-haircut-form
+            div.mb-3
+                label(for='hcDescription', class='form-label') Description
+                input(type='text', class='form-control', name='hcDescription' ,id='hcDescription', placeholder='Description', autocomplete='off')
+            div.mb-3
+                label(for='hcPrice', class='form-label') Price
+                input(type='number', class='form-control', name='hcPrice', step='any' ,id='hcPrice', placeholder='Price')
+            div.mb-3.d-flex.justify-content-around
+                button.btn.btn-primary Submit
+                button(type='button', class='btn btn-secondary', id='edit-back-button') Back
+    div.card-footer
+        div.container.d-flex.justify-content-center
+            span Discover your style
 block haircut-form-scripts
+

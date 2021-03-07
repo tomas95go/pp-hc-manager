@@ -14,7 +14,16 @@ const addNewHaircut = (hcDescription, hcPrice) => {
     return newHaircut;
 };
 
+const selectHaircut = id => {
+    return Haircut.findAll({
+        where: {
+            id: id,
+        },
+    });
+};
+
 module.exports = {
     getHaircutList,
     addNewHaircut,
+    selectHaircut,
 };

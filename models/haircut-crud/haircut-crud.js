@@ -22,8 +22,23 @@ const selectHaircut = id => {
     });
 };
 
+const updateHaircut = (id, newDescription, newPrice) => {
+    return Haircut.update(
+        {
+            description: newDescription,
+            price: newPrice,
+        },
+        {
+            where: {
+                id: id,
+            },
+        }
+    );
+};
+
 module.exports = {
     getHaircutList,
     addNewHaircut,
     selectHaircut,
+    updateHaircut,
 };

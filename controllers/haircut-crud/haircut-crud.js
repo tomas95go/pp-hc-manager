@@ -2,6 +2,7 @@ const {
     getHaircutList,
     addNewHaircut,
     selectHaircut,
+    updateHaircut,
 } = require('../../models/haircut-crud/haircut-crud');
 
 const handleHaircutList = async (req, res) => {
@@ -16,7 +17,11 @@ const handleHaircutAdd = async (req, res) => {
 };
 
 const handleHaircutEdit = async (req, res) => {
-    res.status(200).json('soon');
+    const { id, hcDescription, hcPrice } = req.body;
+    console.log(id, hcDescription, hcPrice);
+    await updateHaircut(id, hcDescription, hcPrice);
+    const updatedHaircut = await selectHaircut(id);
+    res.status(200).json(updatedHaircut);
 };
 
 const handleHaircutSelect = async (req, res) => {

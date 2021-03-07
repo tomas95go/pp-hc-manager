@@ -1,9 +1,11 @@
 const express = require('express');
+const Haircut = require('../../config/db');
 const haircutRouter = express.Router();
 const {
     handleHaircutList,
     handleHaircutAdd,
     handleHaircutEdit,
+    handleHaircutSelect,
 } = require('../../controllers/haircut-crud/haircut-crud');
 
 haircutRouter.get('/home', (req, res) => {
@@ -22,4 +24,7 @@ haircutRouter.put('/edit', (req, res) => {
     handleHaircutEdit(req, res);
 });
 
+haircutRouter.get('/:id', (req, res) => {
+    handleHaircutSelect(req, res);
+});
 module.exports = haircutRouter;

@@ -16,9 +16,13 @@ const handleHaircutAdd = async (req, res) => {
 };
 
 const handleHaircutEdit = async (req, res) => {
-    const { id } = req.body;
+    res.status(200).json('soon');
+};
+
+const handleHaircutSelect = async (req, res) => {
+    const { id } = req.params;
     const haircut = await selectHaircut(id);
     res.status(200).json(haircut);
 };
 
-module.exports = { handleHaircutList, handleHaircutAdd, handleHaircutEdit };
+module.exports = { handleHaircutList, handleHaircutAdd, handleHaircutEdit, handleHaircutSelect };

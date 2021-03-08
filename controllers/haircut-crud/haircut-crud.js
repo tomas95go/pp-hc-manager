@@ -3,6 +3,7 @@ const {
     addNewHaircut,
     selectHaircut,
     updateHaircut,
+    deleteHaircut,
 } = require('../../models/haircut-crud/haircut-crud');
 
 const handleHaircutList = async (req, res) => {
@@ -30,4 +31,16 @@ const handleHaircutSelect = async (req, res) => {
     res.status(200).json(haircut);
 };
 
-module.exports = { handleHaircutList, handleHaircutAdd, handleHaircutEdit, handleHaircutSelect };
+const handleHaircutDelete = async (req, res) => {
+    const { id } = req.body;
+    const haircut = await deleteHaircut(id);
+    res.status(200).json(id);
+};
+
+module.exports = {
+    handleHaircutList,
+    handleHaircutAdd,
+    handleHaircutEdit,
+    handleHaircutSelect,
+    handleHaircutDelete,
+};

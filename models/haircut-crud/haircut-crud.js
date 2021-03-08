@@ -39,9 +39,23 @@ const updateHaircut = (id, newDescription, newPrice) => {
     );
 };
 
+const deleteHaircut = id => {
+    return Haircut.update(
+        {
+            active: 0,
+        },
+        {
+            where: {
+                id: id,
+            },
+        }
+    );
+};
+
 module.exports = {
     getHaircutList,
     addNewHaircut,
     selectHaircut,
     updateHaircut,
+    deleteHaircut,
 };

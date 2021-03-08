@@ -6,6 +6,7 @@ const {
     handleHaircutAdd,
     handleHaircutEdit,
     handleHaircutSelect,
+    handleHaircutDelete,
 } = require('../../controllers/haircut-crud/haircut-crud');
 
 haircutRouter.get('/home', (req, res) => {
@@ -27,4 +28,9 @@ haircutRouter.put('/edit', (req, res) => {
 haircutRouter.get('/:id', (req, res) => {
     handleHaircutSelect(req, res);
 });
+
+haircutRouter.put('/delete', (req, res) => {
+    handleHaircutDelete(req, res);
+});
+
 module.exports = haircutRouter;

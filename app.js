@@ -12,5 +12,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port, () => {
     console.log(`Example app listening to port http://localhost:${port}/home`);
-    console.log(`Process env, node_env: ${process.env.NODE_ENV}`);
 });

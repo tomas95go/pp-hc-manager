@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 
 app.use(compression());
 app.use(bodyParser.json());

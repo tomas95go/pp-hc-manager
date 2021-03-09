@@ -5,6 +5,8 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.listen(port, () => {
     console.log(`Example app listening to port http://localhost:${port}/home`);
 });

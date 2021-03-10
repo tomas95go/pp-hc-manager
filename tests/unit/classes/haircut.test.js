@@ -1,9 +1,9 @@
 const Haircut = require('../../../classes/haircut');
 
 describe('Haircut class', () => {
-    test(`Haircut instance properties should default to '' and 0 `, () => {
+    test('Check if the constructor is defaulting values', () => {
         const newHaircut = new Haircut();
-        expect(newHaircut.description.length).toBeGreaterThan(0);
-        expect(newHaircut.price).toBeGreaterThan(0);
+        expect(newHaircut.description).toHaveLength(0);
+        expect(newHaircut.price).toBe(0);
     });
 });

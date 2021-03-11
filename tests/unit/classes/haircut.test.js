@@ -1,8 +1,8 @@
 const Haircut = require('../../../classes/haircut');
-jest.mock('../../../classes/haircut');
+//jest.mock('../../../classes/haircut');
 
 describe('Haircut class', () => {
-    test('A haircut should be an instance of class Haircut', () => {
+    /*test('A haircut should be an instance of class Haircut', () => {
         const mockFunction = jest.fn();
 
         Haircut.mockImplementation(() => {
@@ -12,7 +12,7 @@ describe('Haircut class', () => {
         const haircut = new Haircut();
         haircut.mockedConstructor('Military', 1500);
         console.log(`Haircut mock attributes: `, haircut.mockedConstructor.mock.calls);
-    });
+    });*/
 
     test('A haircut constructor should always work', () => {});
 

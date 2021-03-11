@@ -1,5 +1,5 @@
 class Haircut {
-    constructor(description = '', price = 0) {
+    constructor(description, price) {
         this.description = description;
         this.price = price;
     }

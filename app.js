@@ -4,7 +4,6 @@ const compression = require('compression');
 const path = require('path');
 const app = express();
 const port = process.env.port || 3000;
-const db = require('./database/config');
 
 app.use(compression());
 app.use(bodyParser.json());

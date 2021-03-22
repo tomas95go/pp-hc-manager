@@ -1,7 +1,7 @@
-const Haircut = require('../index');
+const { Haircut } = require('../index');
 
 const getList = () => {
-    return 'Nice!';
+    return Haircut.findAll();
 };
 
 module.exports = {

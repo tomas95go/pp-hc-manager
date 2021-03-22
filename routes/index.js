@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const haircutRoutes = require('./api/haircuts');
 
-router.get('/home', (req, res) => {
-    res.send('Hi');
-});
+router.use('/haircut', haircutRoutes);
 
 module.exports = router;

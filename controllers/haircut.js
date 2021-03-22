@@ -1,17 +1,9 @@
 'use strict';
 
-const hcList = [
-    {
-        description: 'Military',
-        price: 1500,
-    },
-    {
-        description: 'Punk',
-        price: 3000,
-    },
-];
+const { getList } = require('../models/haircut/haircut');
 
-const list = (req, res) => {
+const list = async (req, res) => {
+    const hcList = await getList();
     send(res, hcList, 200);
 };
 

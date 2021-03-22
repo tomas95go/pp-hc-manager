@@ -3,8 +3,14 @@
 const { getList } = require('../models/haircut/haircut');
 
 const list = async (req, res) => {
-    const hcList = await getList();
-    send(res, hcList, 200);
+    try {
+        const hcList = await getList();
+        const successMsg = formatSuccess(hcList);
+        send(res, successMsg, 200);
+    } catch (error) {
+        const errorMessage = await formatError(error);
+        send(res, errorMessage, 500);
+    }
 };
 
 const add = (req, res) => {
@@ -26,6 +32,26 @@ const update = (req, res, id) => {
 
 const sdelete = (req, res, id) => {
     send(res, id, 200);
+};
+
+const buildSuccessMessage = function (message, data) {
+    this.message = message;
+    this.data = data;
+};
+
+const buildErrorMessage = function (message, data) {
+    this.message = message;
+    this.data = data;
+};
+
+const formatSuccess = data => {
+    const successMessage = new buildSuccessMessage('Success', data);
+    return successMessage;
+};
+
+const formatError = data => {
+    const errorMessage = new buildErrorMessage('Failure', data);
+    return errorMessage;
 };
 
 const send = (res, json, status) => {

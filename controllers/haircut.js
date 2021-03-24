@@ -8,7 +8,7 @@ const list = async (req, res) => {
         const successMsg = formatSuccess(hcList);
         send(res, successMsg, 200);
     } catch (error) {
-        const errorMessage = await formatError(error);
+        const errorMessage = formatError(error);
         send(res, errorMessage, 500);
     }
 };

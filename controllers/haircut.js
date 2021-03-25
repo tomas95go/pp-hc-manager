@@ -29,6 +29,10 @@ const add = async (req, res) => {
 const selectOne = async (id, res) => {
     try {
         const haircut = await getOneDB(id);
+        const isEmpty = haircut.length === 0;
+        if (isEmpty) {
+            throw new Error(`Haircut with number ${id} do not exist`);
+        }
         return haircut;
     } catch (error) {
         const errorMessage = formatError(error.message);

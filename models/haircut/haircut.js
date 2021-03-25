@@ -15,9 +15,13 @@ const addToDB = haircut => {
 const getOneDB = id => {
     return Haircut.findAll({
         where: {
-            ids: id,
+            id: id,
         },
     });
+};
+
+const updateDB = id => {
+    return null;
 };
 
 module.exports = {

@@ -18,9 +18,12 @@ router.put('/edit/:id', (req, res) => {
     update(req, res);
 });
 
+router.get('/delete/:id', (req, res) => {
+    selectOne(req, res);
+});
+
 router.put('/delete/:id', (req, res) => {
-    const { id } = req.params;
-    sdelete(req, res, id);
+    sdelete(req, res);
 });
 
 module.exports = router;

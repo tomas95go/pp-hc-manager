@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const { Haircut } = require('../index');
 
 const getList = () => {
@@ -36,9 +35,23 @@ const updateDB = haircut => {
     );
 };
 
+const sdeleteDB = id => {
+    return Haircut.update(
+        {
+            active: 0,
+        },
+        {
+            where: {
+                id: id,
+            },
+        }
+    );
+};
+
 module.exports = {
     getList,
     addToDB,
     getOneDB,
     updateDB,
+    sdeleteDB,
 };

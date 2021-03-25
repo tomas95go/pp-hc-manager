@@ -19,7 +19,8 @@ const add = async (req, res) => {
     try {
         const haircut = new Haircut(description, price);
         const newHaircut = await addToDB(haircut);
-        send(res, newHaircut, 200);
+        const successMsg = formatSuccess(newHaircut);
+        send(res, successMsg, 200);
     } catch (error) {
         const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);

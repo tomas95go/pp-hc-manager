@@ -26,14 +26,17 @@ const add = async (req, res) => {
     }
 };
 
-const selectOne = async (id, res) => {
+const selectOne = async (req, res) => {
+    const { id } = req.params;
+
     try {
         const haircut = await getOneDB(id);
         const isEmpty = haircut.length === 0;
         if (isEmpty) {
             throw new Error(`Haircut with number ${id} do not exist`);
         }
-        return haircut;
+        const successMsg = formatSuccess(haircut);
+        send(res, successMsg, 200);
     } catch (error) {
         const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
@@ -41,14 +44,7 @@ const selectOne = async (id, res) => {
 };
 
 const update = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const haircut = await selectOne(id, res);
-        send(res, haircut, 200);
-    } catch (error) {
-        const errorMessage = formatError(error.message);
-        send(res, errorMessage, 500);
-    }
+    return null;
 };
 
 const sdelete = (req, res, id) => {
@@ -89,4 +85,5 @@ module.exports = {
     add,
     update,
     sdelete,
+    selectOne,
 };

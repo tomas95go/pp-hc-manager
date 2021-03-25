@@ -7,8 +7,8 @@ const getList = () => {
 const addToDB = haircut => {
     const { description, price } = haircut;
     return Haircut.create({
-        descriptions: description,
-        prices: price,
+        description: description,
+        price: price,
     });
 };
 

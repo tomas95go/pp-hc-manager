@@ -8,7 +8,7 @@ const list = async (req, res) => {
         const successMsg = formatSuccess(hcList);
         send(res, successMsg, 200);
     } catch (error) {
-        const errorMessage = formatError(error);
+        const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
     }
 };
@@ -21,7 +21,7 @@ const add = async (req, res) => {
         const newHaircut = await addToDB(haircut);
         send(res, newHaircut, 200);
     } catch (error) {
-        const errorMessage = formatError(error);
+        const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
     }
 };

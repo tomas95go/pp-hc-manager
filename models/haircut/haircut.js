@@ -13,7 +13,7 @@ const addToDB = haircut => {
 };
 
 const getOneDB = id => {
-    return Haircut.findAll({
+    return Haircut.findOne({
         where: {
             id: id,
         },

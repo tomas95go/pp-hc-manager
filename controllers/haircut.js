@@ -1,6 +1,6 @@
 'use strict';
 
-const { getList, addToDB } = require('../models/haircut/haircut');
+const { getList, addToDB, getOneDB } = require('../models/haircut/haircut');
 
 const list = async (req, res) => {
     try {
@@ -26,8 +26,25 @@ const add = async (req, res) => {
     }
 };
 
-const update = (req, res, id) => {
-    send(res, id, 200);
+const selectOne = async (id, res) => {
+    try {
+        const haircut = await getOneDB(id);
+        return haircut;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
+};
+
+const update = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const haircut = await selectOne(id, res);
+        send(res, haircut, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
 };
 
 const sdelete = (req, res, id) => {

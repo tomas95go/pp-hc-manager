@@ -11,8 +11,7 @@ router.use('/add', (req, res) => {
 });
 
 router.use('/update/:id', (req, res) => {
-    const { id } = req.params;
-    update(req, res, id);
+    update(req, res);
 });
 
 router.use('/delete/:id', (req, res) => {

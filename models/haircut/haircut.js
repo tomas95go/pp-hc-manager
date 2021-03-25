@@ -12,7 +12,16 @@ const addToDB = haircut => {
     });
 };
 
+const getOneDB = id => {
+    return Haircut.findAll({
+        where: {
+            ids: id,
+        },
+    });
+};
+
 module.exports = {
     getList,
     addToDB,
+    getOneDB,
 };

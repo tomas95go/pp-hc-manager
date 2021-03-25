@@ -1,7 +1,11 @@
 const { Haircut } = require('../index');
 
 const getList = () => {
-    return Haircut.findAll();
+    return Haircut.findAll({
+        where: {
+            active: 1,
+        },
+    });
 };
 
 const addToDB = haircut => {

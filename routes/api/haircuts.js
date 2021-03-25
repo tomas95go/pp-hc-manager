@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { list, add, update, sdelete, selectOne } = require('../../controllers/haircut');
+const { list, add, update, sdelete, selectOne, addMultiple } = require('../../controllers/haircut');
 
 router.get('/list', (req, res) => {
     list(req, res);
@@ -8,6 +8,10 @@ router.get('/list', (req, res) => {
 
 router.post('/add', (req, res) => {
     add(req, res);
+});
+
+router.post('/add/multiple', (req, res) => {
+    addMultiple(req, res);
 });
 
 router.get('/edit/:id', (req, res) => {

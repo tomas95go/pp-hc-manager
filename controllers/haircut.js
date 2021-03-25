@@ -27,6 +27,11 @@ const add = async (req, res) => {
     }
 };
 
+const addMultiple = async (req, res) => {
+    const { data } = req.body;
+    res.status(200).json(data);
+};
+
 const selectOne = async (req, res) => {
     const { id } = req.params;
 
@@ -108,4 +113,5 @@ module.exports = {
     update,
     sdelete,
     selectOne,
+    addMultiple,
 };

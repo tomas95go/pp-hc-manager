@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { Haircut } = require('../index');
 
 const getList = () => {
@@ -20,12 +21,24 @@ const getOneDB = id => {
     });
 };
 
-const updateDB = id => {
-    return null;
+const updateDB = haircut => {
+    const { id, description, price } = haircut;
+    return Haircut.update(
+        {
+            description: description,
+            price: price,
+        },
+        {
+            where: {
+                id: id,
+            },
+        }
+    );
 };
 
 module.exports = {
     getList,
     addToDB,
     getOneDB,
+    updateDB,
 };

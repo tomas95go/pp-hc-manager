@@ -1,6 +1,6 @@
 'use strict';
 
-const { getList, addToDB, getOneDB } = require('../models/haircut/haircut');
+const { getList, addToDB, getOneDB, updateDB } = require('../models/haircut/haircut');
 
 const list = async (req, res) => {
     try {
@@ -17,12 +17,12 @@ const add = async (req, res) => {
     const { description, price } = req.body;
 
     try {
-        const haircut = new Haircut(description, price);
+        const haircut = new Haircut(null, description, price);
         const newHaircut = await addToDB(haircut);
         const successMsg = formatSuccess(newHaircut);
         send(res, successMsg, 200);
     } catch (error) {
-        const errorMessage = formatError(error.message);
+        const errorMessage = formatError(error);
         send(res, errorMessage, 500);
     }
 };
@@ -45,14 +45,25 @@ const selectOne = async (req, res) => {
 };
 
 const update = async (req, res) => {
-    return null;
+    const { id } = req.params;
+    const { description, price } = req.body;
+    try {
+        const haircut = new Haircut(id, description, price);
+        const updatedHaircut = await updateDB(haircut);
+        const successMsg = formatSuccess(haircut);
+        send(res, successMsg, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
 };
 
 const sdelete = (req, res, id) => {
     send(res, id, 200);
 };
 
-const Haircut = function (description, price) {
+const Haircut = function (id, description, price) {
+    this.id = id;
     this.description = description;
     this.price = price;
 };

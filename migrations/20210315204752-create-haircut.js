@@ -10,12 +10,16 @@ module.exports = {
             },
             description: {
                 type: Sequelize.STRING,
+                allowNull: false,
             },
             price: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
             },
             active: {
                 type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: 1,
             },
             createdAt: {
                 allowNull: false,

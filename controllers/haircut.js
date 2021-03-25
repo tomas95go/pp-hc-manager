@@ -13,17 +13,36 @@ const list = async (req, res) => {
     }
 };
 
-const add = async (req, res) => {
-    const { description, price } = req.body;
+const handleIndividualAdd = async (req, res) => {
+    try {
+        const haircut = prepareIndividualAdd(req);
+        const newHaircut = await addIndividualHaircut(haircut);
+        send(res, newHaircut, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
 
+const prepareIndividualAdd = req => {
+    const { description, price } = req.body;
     try {
         const haircut = new Haircut(null, description, price);
+        return haircut;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const addIndividualHaircut = async haircut => {
+    try {
         const newHaircut = await addToDB(haircut);
         const successMsg = formatSuccess(newHaircut);
-        send(res, successMsg, 200);
+        return successMsg;
     } catch (error) {
-        const errorMessage = formatError(error);
-        send(res, errorMessage, 500);
+        const errorMessage = formatError(error.message);
+        return errorMessage;
     }
 };
 
@@ -109,9 +128,9 @@ const send = (res, json, status) => {
 
 module.exports = {
     list,
-    add,
     update,
     sdelete,
     selectOne,
     addMultiple,
+    handleIndividualAdd,
 };

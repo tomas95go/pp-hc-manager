@@ -1,20 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const { list, add, update, sdelete } = require('../../controllers/haircut');
+const { list, add, update, sdelete, selectOne } = require('../../controllers/haircut');
 
-router.use('/list', (req, res) => {
+router.get('/list', (req, res) => {
     list(req, res);
 });
 
-router.use('/add', (req, res) => {
+router.post('/add', (req, res) => {
     add(req, res);
 });
 
-router.use('/update/:id', (req, res) => {
+router.get('/:id', (req, res) => {
+    selectOne(req, res);
+});
+
+router.put('/edit/:id', (req, res) => {
     update(req, res);
 });
 
-router.use('/delete/:id', (req, res) => {
+router.put('/delete/:id', (req, res) => {
     const { id } = req.params;
     sdelete(req, res, id);
 });

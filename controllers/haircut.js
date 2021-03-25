@@ -1,6 +1,6 @@
 'use strict';
 
-const { getList } = require('../models/haircut/haircut');
+const { getList, addToDB } = require('../models/haircut/haircut');
 
 const list = async (req, res) => {
     try {
@@ -13,17 +13,17 @@ const list = async (req, res) => {
     }
 };
 
-const add = (req, res) => {
-    const Haircut = function (description, price) {
-        this.description = description;
-        this.price = price;
-    };
+const add = async (req, res) => {
+    const { description, price } = req.body;
 
-    const haircut = new Haircut('Drake', 1500);
-
-    console.log(haircut);
-
-    send(res, haircut, 200);
+    try {
+        const haircut = new Haircut(description, price);
+        const newHaircut = await addToDB(haircut);
+        send(res, newHaircut, 200);
+    } catch (error) {
+        const errorMessage = formatError(error);
+        send(res, errorMessage, 500);
+    }
 };
 
 const update = (req, res, id) => {
@@ -32,6 +32,11 @@ const update = (req, res, id) => {
 
 const sdelete = (req, res, id) => {
     send(res, id, 200);
+};
+
+const Haircut = function (description, price) {
+    this.description = description;
+    this.price = price;
 };
 
 const buildSuccessMessage = function (message, data) {

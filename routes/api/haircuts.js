@@ -10,7 +10,7 @@ router.post('/add', (req, res) => {
     add(req, res);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/edit/:id', (req, res) => {
     selectOne(req, res);
 });
 

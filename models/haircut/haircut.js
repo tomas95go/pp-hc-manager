@@ -1,4 +1,5 @@
 const { Haircut } = require('../index');
+const { Op } = require('sequelize');
 
 const getList = () => {
     return Haircut.findAll({
@@ -20,6 +21,17 @@ const getOneDB = id => {
     return Haircut.findOne({
         where: {
             id: id,
+        },
+    });
+};
+
+const getMultipleDB = haircutsIds => {
+    return Haircut.findAll({
+        where: {
+            id: {
+                [Op.in]: haircutsIds,
+            },
+            active: 1,
         },
     });
 };
@@ -58,4 +70,5 @@ module.exports = {
     getOneDB,
     updateDB,
     sdeleteDB,
+    getMultipleDB,
 };

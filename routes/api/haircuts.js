@@ -7,6 +7,8 @@ const {
     sdelete,
     selectOne,
     handleMultipleAdd,
+    selectMultiple,
+    handleMultipleEdits,
 } = require('../../controllers/haircut');
 
 router.get('/list', (req, res) => {

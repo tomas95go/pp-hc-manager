@@ -1,6 +1,13 @@
 'use strict';
 
-const { getList, addToDB, getOneDB, updateDB, sdeleteDB } = require('../models/haircut/haircut');
+const {
+    getList,
+    addToDB,
+    getOneDB,
+    updateDB,
+    sdeleteDB,
+    getMultipleDB,
+} = require('../models/haircut/haircut');
 
 const list = async (req, res) => {
     try {
@@ -103,7 +110,22 @@ const selectOne = async (req, res) => {
         const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
     }
-    send(res, id, 200);
+};
+
+const selectMultiple = async (req, res) => {
+    const { haircutsIds } = req.body;
+    try {
+        const editableHaircuts = await getMultipleDB(haircutsIds);
+        const successMsg = formatSuccess(editableHaircuts);
+        send(res, successMsg, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
+};
+
+const handleMultipleEdits = async (req, res) => {
+    return null;
 };
 
 const update = async (req, res) => {
@@ -170,4 +192,6 @@ module.exports = {
     selectOne,
     handleMultipleAdd,
     handleIndividualAdd,
+    selectMultiple,
+    handleMultipleEdits,
 };

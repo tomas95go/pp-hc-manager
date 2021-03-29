@@ -4,7 +4,7 @@ const {
     list,
     handleIndividualAdd,
     handleIndividualUpdate,
-    sdelete,
+    handleIndividualSoftDelete,
     selectOne,
     handleMultipleAdd,
     selectMultiple,
@@ -41,7 +41,7 @@ router.put('/edit/multiple', (req, res) => {
 });
 
 router.put('/delete/individual/:id', (req, res) => {
-    sdelete(req, res);
+    handleIndividualSoftDelete(req, res);
 });
 
 router.put('/delete/multiple', (req, res) => {

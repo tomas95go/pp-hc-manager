@@ -194,10 +194,10 @@ const updateHaircut = async haircut => {
     }
 };
 
-const sdelete = async (req, res) => {
-    const { id } = req.params;
+const handleIndividualSoftDelete = async (req, res) => {
     try {
-        const sdeleteHaircut = await sdeleteDB(id);
+        const haircutId = prepareIndividualSoftDelete(req);
+        const sdeleteHaircut = await softDelete(haircutId);
         const successMsg = formatSuccess(sdeleteHaircut);
         send(res, successMsg, 200);
     } catch (error) {
@@ -206,15 +206,55 @@ const sdelete = async (req, res) => {
     }
 };
 
-const handleMultipleDeletes = async (req, res) => {
-    const { haircutsIds } = req.body;
+const prepareIndividualSoftDelete = req => {
     try {
-        const sdeletedHaircuts = await sdeleteMultipleDB(haircutsIds);
+        const { id } = req.params;
+        return id;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const softDelete = async id => {
+    try {
+        const sdeleteHaircut = await sdeleteDB(id);
+        return sdeleteHaircut;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const handleMultipleDeletes = async (req, res) => {
+    try {
+        const haircutsIds = prepareMultipleSoftDeletes(req);
+        const sdeletedHaircuts = await softDeleteMultipleHaircuts(haircutsIds);
         const successMsg = formatSuccess(sdeletedHaircuts);
         send(res, successMsg, 200);
     } catch (error) {
         const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
+    }
+};
+
+const prepareMultipleSoftDeletes = req => {
+    try {
+        const { haircutsIds } = req.body;
+        return haircutsIds;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const softDeleteMultipleHaircuts = async haircutsIds => {
+    try {
+        const sdeletedHaircuts = await sdeleteMultipleDB(haircutsIds);
+        return sdeletedHaircuts;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
     }
 };
 
@@ -251,7 +291,7 @@ const send = (res, json, status) => {
 module.exports = {
     list,
     handleIndividualUpdate,
-    sdelete,
+    handleIndividualSoftDelete,
     selectOne,
     handleMultipleAdd,
     handleIndividualAdd,

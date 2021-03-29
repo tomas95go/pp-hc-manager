@@ -64,6 +64,22 @@ const sdeleteDB = id => {
     );
 };
 
+const sdeleteMultipleDB = haircutsIds => {
+    return Haircut.update(
+        {
+            active: 0,
+        },
+        {
+            where: {
+                id: {
+                    [Op.in]: haircutsIds,
+                },
+                active: 1,
+            },
+        }
+    );
+};
+
 module.exports = {
     getList,
     addToDB,
@@ -71,4 +87,5 @@ module.exports = {
     updateDB,
     sdeleteDB,
     getMultipleDB,
+    sdeleteMultipleDB,
 };

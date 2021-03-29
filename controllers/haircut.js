@@ -7,6 +7,7 @@ const {
     updateDB,
     sdeleteDB,
     getMultipleDB,
+    sdeleteMultipleDB,
 } = require('../models/haircut/haircut');
 
 const list = async (req, res) => {
@@ -165,6 +166,18 @@ const sdelete = async (req, res) => {
     }
 };
 
+const handleMultipleDeletes = async (req, res) => {
+    const { haircutsIds } = req.body;
+    try {
+        const sdeletedHaircuts = await sdeleteMultipleDB(haircutsIds);
+        const successMsg = formatSuccess(sdeletedHaircuts);
+        send(res, successMsg, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
+};
+
 const Haircut = function (id, description, price) {
     this.id = id;
     this.description = description;
@@ -204,4 +217,5 @@ module.exports = {
     handleIndividualAdd,
     selectMultiple,
     handleMultipleEdits,
+    handleMultipleDeletes,
 };

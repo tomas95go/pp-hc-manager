@@ -3,7 +3,7 @@ const router = express.Router();
 const {
     list,
     handleIndividualAdd,
-    update,
+    handleIndividualUpdate,
     sdelete,
     selectOne,
     handleMultipleAdd,
@@ -29,7 +29,7 @@ router.get('/edit/individual/:id', (req, res) => {
 });
 
 router.put('/edit/individual/:id', (req, res) => {
-    update(req, res);
+    handleIndividualUpdate(req, res);
 });
 
 router.get('/edit/multiple', (req, res) => {

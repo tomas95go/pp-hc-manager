@@ -139,14 +139,29 @@ const handleMultipleEdits = async (req, res) => {
     }
 };
 
-const update = async (req, res) => {
+const handleIndividualUpdate = async (req, res) => {
+    const haircut = prepareIndividualUpdate(req);
+    const updatedHaircut = await updateHaircut(haircut);
+    const successMsg = formatSuccess(updatedHaircut);
+    send(res, successMsg, 200);
+};
+
+const prepareIndividualUpdate = (req, res) => {
     const { id } = req.params;
     const { description, price } = req.body;
     try {
         const haircut = new Haircut(id, description, price);
-        const updatedHaircut = await updateDB(haircut);
-        const successMsg = formatSuccess(haircut);
-        send(res, successMsg, 200);
+        return haircut;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
+};
+
+const updateHaircut = async haircut => {
+    try {
+        await updateDB(haircut);
+        return haircut;
     } catch (error) {
         const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
@@ -210,7 +225,7 @@ const send = (res, json, status) => {
 
 module.exports = {
     list,
-    update,
+    handleIndividualUpdate,
     sdelete,
     selectOne,
     handleMultipleAdd,

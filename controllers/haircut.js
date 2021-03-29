@@ -124,17 +124,44 @@ const selectMultiple = async (req, res) => {
     }
 };
 
-const handleMultipleEdits = async (req, res) => {
-    const { haircuts } = req.body;
+const handleMultipleUpdates = async (req, res) => {
     try {
-        for (const haircut of haircuts) {
-            await updateDB(haircut);
-        }
+        const haircuts = prepareMultipleUpdates(req);
+        await updateMultipleHaircuts(haircuts);
         const successMsg = formatSuccess(haircuts);
         send(res, successMsg, 200);
     } catch (error) {
         const errorMessage = formatError(error.message);
         send(res, errorMessage, 500);
+    }
+};
+
+const prepareMultipleUpdates = req => {
+    const { haircuts } = req.body;
+    try {
+        const newHaircuts = haircuts.map(element => {
+            const { id, description, price } = element;
+            const haircut = new Haircut(id, description, price);
+            return haircut;
+        });
+        return newHaircuts;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const updateMultipleHaircuts = async haircuts => {
+    try {
+        const newHaircuts = [];
+        for (const haircut of haircuts) {
+            const newHaircut = await updateHaircut(haircut);
+            newHaircuts.push(newHaircut);
+        }
+        return newHaircuts;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
     }
 };
 
@@ -145,7 +172,7 @@ const handleIndividualUpdate = async (req, res) => {
     send(res, successMsg, 200);
 };
 
-const prepareIndividualUpdate = (req, res) => {
+const prepareIndividualUpdate = req => {
     const { id } = req.params;
     const { description, price } = req.body;
     try {
@@ -169,7 +196,6 @@ const updateHaircut = async haircut => {
 
 const sdelete = async (req, res) => {
     const { id } = req.params;
-
     try {
         const sdeleteHaircut = await sdeleteDB(id);
         const successMsg = formatSuccess(sdeleteHaircut);
@@ -230,6 +256,6 @@ module.exports = {
     handleMultipleAdd,
     handleIndividualAdd,
     selectMultiple,
-    handleMultipleEdits,
+    handleMultipleUpdates,
     handleMultipleDeletes,
 };

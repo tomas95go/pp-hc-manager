@@ -34,8 +34,8 @@ const handleIndividualAdd = async (req, res) => {
 };
 
 const prepareIndividualAdd = req => {
-    const { description, price } = req.body;
     try {
+        const { description, price } = req.body;
         const haircut = new Haircut(null, description, price);
         return haircut;
     } catch (error) {
@@ -67,8 +67,8 @@ const handleMultipleAdd = async (req, res) => {
 };
 
 const prepareMultipleAdd = req => {
-    const { haircuts } = req.body;
     try {
+        const { haircuts } = req.body;
         const newHaircuts = haircuts.map(element => {
             const { description, price } = element;
             const haircut = new Haircut(null, description, price);
@@ -96,9 +96,8 @@ const addMultipleHaircuts = async haircuts => {
 };
 
 const selectOne = async (req, res) => {
-    const { id } = req.params;
-
     try {
+        const { id } = req.params;
         const haircut = await getOneDB(id);
         const isEmpty = haircut === null;
         if (isEmpty) {
@@ -113,8 +112,8 @@ const selectOne = async (req, res) => {
 };
 
 const selectMultiple = async (req, res) => {
-    const { haircutsIds } = req.body;
     try {
+        const { haircutsIds } = req.body;
         const editableHaircuts = await getMultipleDB(haircutsIds);
         const successMsg = formatSuccess(editableHaircuts);
         send(res, successMsg, 200);
@@ -137,8 +136,8 @@ const handleMultipleUpdates = async (req, res) => {
 };
 
 const prepareMultipleUpdates = req => {
-    const { haircuts } = req.body;
     try {
+        const { haircuts } = req.body;
         const newHaircuts = haircuts.map(element => {
             const { id, description, price } = element;
             const haircut = new Haircut(id, description, price);
@@ -173,14 +172,14 @@ const handleIndividualUpdate = async (req, res) => {
 };
 
 const prepareIndividualUpdate = req => {
-    const { id } = req.params;
-    const { description, price } = req.body;
     try {
+        const { id } = req.params;
+        const { description, price } = req.body;
         const haircut = new Haircut(id, description, price);
         return haircut;
     } catch (error) {
         const errorMessage = formatError(error.message);
-        send(res, errorMessage, 500);
+        return errorMessage;
     }
 };
 
@@ -190,7 +189,7 @@ const updateHaircut = async haircut => {
         return haircut;
     } catch (error) {
         const errorMessage = formatError(error.message);
-        send(res, errorMessage, 500);
+        return errorMessage;
     }
 };
 

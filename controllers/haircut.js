@@ -46,9 +46,46 @@ const addIndividualHaircut = async haircut => {
     }
 };
 
-const addMultiple = async (req, res) => {
-    const { data } = req.body;
-    res.status(200).json(data);
+const handleMultipleAdd = async (req, res) => {
+    try {
+        const haircuts = prepareMultipleAdd(req);
+        const haircutQuantity = haircuts.length;
+        const newHaircuts = await addMultipleHaircuts(haircuts);
+        send(res, newHaircuts, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const prepareMultipleAdd = req => {
+    const { haircuts } = req.body;
+    try {
+        const newHaircuts = haircuts.map(element => {
+            const { description, price } = element;
+            const haircut = new Haircut(null, description, price);
+            return haircut;
+        });
+        return newHaircuts;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
+};
+
+const addMultipleHaircuts = async haircuts => {
+    try {
+        const newHaircuts = [];
+        for (const haircut of haircuts) {
+            const newHaircut = await addToDB(haircut);
+            newHaircuts.push(newHaircut);
+        }
+        const successMsg = formatSuccess(newHaircuts);
+        return successMsg;
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        return errorMessage;
+    }
 };
 
 const selectOne = async (req, res) => {
@@ -131,6 +168,6 @@ module.exports = {
     update,
     sdelete,
     selectOne,
-    addMultiple,
+    handleMultipleAdd,
     handleIndividualAdd,
 };

@@ -6,7 +6,7 @@ const {
     update,
     sdelete,
     selectOne,
-    addMultiple,
+    handleMultipleAdd,
 } = require('../../controllers/haircut');
 
 router.get('/list', (req, res) => {
@@ -18,7 +18,7 @@ router.post('/add', (req, res) => {
 });
 
 router.post('/add/multiple', (req, res) => {
-    addMultiple(req, res);
+    handleMultipleAdd(req, res);
 });
 
 router.get('/edit/:id', (req, res) => {

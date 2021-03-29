@@ -25,7 +25,8 @@ const handleIndividualAdd = async (req, res) => {
     try {
         const haircut = prepareIndividualAdd(req);
         const newHaircut = await addIndividualHaircut(haircut);
-        send(res, newHaircut, 200);
+        const successMsg = formatSuccess(newHaircut);
+        send(res, successMsg, 200);
     } catch (error) {
         const errorMessage = formatError(error.message);
         return errorMessage;
@@ -46,8 +47,7 @@ const prepareIndividualAdd = req => {
 const addIndividualHaircut = async haircut => {
     try {
         const newHaircut = await addToDB(haircut);
-        const successMsg = formatSuccess(newHaircut);
-        return successMsg;
+        return newHaircut;
     } catch (error) {
         const errorMessage = formatError(error.message);
         return errorMessage;
@@ -57,9 +57,9 @@ const addIndividualHaircut = async haircut => {
 const handleMultipleAdd = async (req, res) => {
     try {
         const haircuts = prepareMultipleAdd(req);
-        const haircutQuantity = haircuts.length;
         const newHaircuts = await addMultipleHaircuts(haircuts);
-        send(res, newHaircuts, 200);
+        const successMsg = formatSuccess(newHaircuts);
+        send(res, successMsg, 200);
     } catch (error) {
         const errorMessage = formatError(error.message);
         return errorMessage;
@@ -88,8 +88,7 @@ const addMultipleHaircuts = async haircuts => {
             const newHaircut = await addToDB(haircut);
             newHaircuts.push(newHaircut);
         }
-        const successMsg = formatSuccess(newHaircuts);
-        return successMsg;
+        return newHaircuts;
     } catch (error) {
         const errorMessage = formatError(error.message);
         return errorMessage;

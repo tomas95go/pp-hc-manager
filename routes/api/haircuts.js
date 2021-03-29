@@ -21,6 +21,14 @@ router.post('/add/multiple', (req, res) => {
     handleMultipleAdd(req, res);
 });
 
+router.get('/edit/multiple', (req, res) => {
+    selectMultiple(req, res);
+});
+
+router.put('/edit/multiple', (req, res) => {
+    handleMultipleEdits(req, res);
+});
+
 router.get('/edit/:id', (req, res) => {
     selectOne(req, res);
 });

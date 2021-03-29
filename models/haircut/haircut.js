@@ -21,6 +21,7 @@ const getOneDB = id => {
     return Haircut.findOne({
         where: {
             id: id,
+            active: 1,
         },
     });
 };
@@ -46,6 +47,7 @@ const updateDB = haircut => {
         {
             where: {
                 id: id,
+                active: 1,
             },
         }
     );

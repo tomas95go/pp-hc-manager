@@ -125,7 +125,17 @@ const selectMultiple = async (req, res) => {
 };
 
 const handleMultipleEdits = async (req, res) => {
-    return null;
+    const { haircuts } = req.body;
+    try {
+        for (const haircut of haircuts) {
+            await updateDB(haircut);
+        }
+        const successMsg = formatSuccess(haircuts);
+        send(res, successMsg, 200);
+    } catch (error) {
+        const errorMessage = formatError(error.message);
+        send(res, errorMessage, 500);
+    }
 };
 
 const update = async (req, res) => {

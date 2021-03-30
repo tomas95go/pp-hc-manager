@@ -1,1 +1,0 @@
-web: NODE_ENV=development dotenv/config app.js

@@ -1,2 +1,1 @@
-web: NODE_ENV=development nodemon -r dotenv/config app.js
-dev: npm install nodemon
+web: NODE_ENV=development dotenv/config app.js

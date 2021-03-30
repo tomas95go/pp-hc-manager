@@ -1,5 +1,6 @@
 'use strict';
-
+const Haircut = require('../classes/haircut');
+const { formatSuccess, formatError } = require('../helpers/messages');
 const {
     getList,
     addToDB,
@@ -257,30 +258,9 @@ const softDeleteMultipleHaircuts = async haircutsIds => {
     }
 };
 
-const Haircut = function (id, description, price) {
-    this.id = id;
-    this.description = description;
-    this.price = price;
-};
-
 const buildSuccessMessage = function (message, data) {
     this.message = message;
     this.data = data;
-};
-
-const buildErrorMessage = function (message, data) {
-    this.message = message;
-    this.data = data;
-};
-
-const formatSuccess = data => {
-    const successMessage = new buildSuccessMessage('Success', data);
-    return successMessage;
-};
-
-const formatError = data => {
-    const errorMessage = new buildErrorMessage('Failure', data);
-    return errorMessage;
 };
 
 const send = (res, json, status) => {

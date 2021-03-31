@@ -12,6 +12,9 @@ const db = {};
 let sequelize;
 if (!isProduction && !isDevLocal) {
     sequelize = new Sequelize(development_heroku.uri, {
+        database: development_heroku.database,
+        username: development_heroku.username,
+        password: development_heroku.password,
         dialect: development_heroku.dialect,
         protocol: development_heroku.protocol,
         host: development_heroku.host,

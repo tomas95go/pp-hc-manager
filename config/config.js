@@ -5,6 +5,6 @@ module.exports = {
         storage: process.env.DB_STORAGE_DEV,
     },
     development_heroku: {
-        uri: process.env.DB_URI_DEV_HEROKU,
+        uri: process.env.DATABASE_URL,
     },
 };

@@ -5,16 +5,19 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const isProduction = process.env.NODE_ENV === 'production';
+const isDevLocal = process.env.NODE_ENV === 'development_local';
 const { development } = require('../config/config');
 const db = {};
 
 let sequelize;
-if (!isProduction) {
-    sequelize = new Sequelize({
-        dialect: development.dialect,
-        storage: development.storage,
-    });
+if (!isProduction && !isDevLocal) {
+    sequelize = new Sequelize(`${development.uri}`, {});
 }
+
+sequelize = new Sequelize({
+    dialect: development.dialect,
+    storage: development.storage,
+});
 
 fs.readdirSync(__dirname)
     .filter(file => {

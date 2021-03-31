@@ -1,4 +1,7 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'development_heroku') {
+    require('dotenv').config();
+}
+
 module.exports = {
     development_local: {
         dialect: process.env.DB_DIALECT_DEV,

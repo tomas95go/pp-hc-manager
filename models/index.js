@@ -7,14 +7,11 @@ const basename = path.basename(__filename);
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevLocal = process.env.NODE_ENV === 'development_local';
 const { development_local, development_heroku } = require('../config/config');
-const { Client } = require('pg');
 const db = {};
 
 let sequelize;
 if (!isProduction && !isDevLocal) {
-    sequelize = new Sequelize(`${development_heroku.uri}?ssl=true`, {
-        dialect: `${development_heroku.dialect}`,
-    });
+    sequelize = new Sequelize(`${development_heroku.uri}?ssl=true`);
 }
 
 if (isDevLocal) {

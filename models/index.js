@@ -16,10 +16,12 @@ if (!isProduction && !isDevLocal) {
     });
 }
 
-sequelize = new Sequelize({
-    dialect: `${development_local.dialect}`,
-    storage: `${development_local.storage}`,
-});
+if (isDevLocal) {
+    sequelize = new Sequelize({
+        dialect: `${development_local.dialect}`,
+        storage: `${development_local.storage}`,
+    });
+}
 
 fs.readdirSync(__dirname)
     .filter(file => {

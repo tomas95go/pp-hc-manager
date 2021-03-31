@@ -11,9 +11,8 @@ const db = {};
 
 let sequelize;
 if (!isProduction && !isDevLocal) {
-    sequelize = new Sequelize(`${development_heroku.uri}`, {
+    sequelize = new Sequelize(`${development_heroku.uri}$sslmode=require`, {
         dialect: `${development_heroku.dialect}`,
-        native: `${development_heroku.native}`,
     });
 }
 

@@ -8,7 +8,7 @@ module.exports = {
         storage: process.env.DB_STORAGE_DEV,
     },
     development_heroku: {
-        uri: process.env.DATABASE_URL,
+        uri: `${process.env.DATABASE_URL}?ssl=true`,
         dialect: process.env.DATABASE_DIALECT,
     },
 };

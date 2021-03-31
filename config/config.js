@@ -11,5 +11,6 @@ module.exports = {
         uri: process.env.DATABASE_URL,
         dialect: process.env.DATABASE_DIALECT,
         protocol: process.env.DATABASE_PROTOCOL,
+        host: process.env.DATABASE_HOST,
     },
 };

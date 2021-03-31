@@ -14,6 +14,7 @@ if (!isProduction && !isDevLocal) {
     sequelize = new Sequelize(development_heroku.uri, {
         dialect: development_heroku.dialect,
         protocol: development_heroku.protocol,
+        host: development_heroku.host,
         dialectOptions: {
             ssl: {
                 require: true,

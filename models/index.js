@@ -11,12 +11,16 @@ const db = {};
 
 let sequelize;
 if (!isProduction && !isDevLocal) {
-    sequelize = new Sequelize(
-        `${development_heroku.uri}`
-    ); /*, {
+    sequelize = new Sequelize(`${development_heroku.uri}`, {
         dialect: `${development_heroku.dialect}`,
-        protocol: 'postgres',
-    });*/
+        protocol: `${development_heroku.protocol}`,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
+    });
 }
 
 if (isDevLocal) {

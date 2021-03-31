@@ -12,18 +12,8 @@ const db = {};
 
 let sequelize;
 if (!isProduction && !isDevLocal) {
-    const client = new Client({
-        connectionString: `${development_heroku.uri}`,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    });
-
-    client.connect();
-
     sequelize = new Sequelize(`${development_heroku.uri}?ssl=true`, {
         dialect: `${development_heroku.dialect}`,
-        native: `${development_heroku.native}`,
     });
 }
 

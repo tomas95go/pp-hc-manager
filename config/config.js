@@ -7,5 +7,6 @@ module.exports = {
     development_heroku: {
         uri: process.env.DATABASE_URL,
         dialect: process.env.DATABASE_DIALECT,
+        native: process.env.DATABASE_SSL,
     },
 };

@@ -11,12 +11,12 @@ const db = {};
 
 let sequelize;
 if (!isProduction && !isDevLocal) {
-    sequelize = new Sequelize(`${development.uri}`, {});
+    sequelize = new Sequelize(`${development_heroku.uri}`, {});
 }
 
 sequelize = new Sequelize({
-    dialect: development.dialect,
-    storage: development.storage,
+    dialect: development_local.dialect,
+    storage: development_local.storage,
 });
 
 fs.readdirSync(__dirname)
